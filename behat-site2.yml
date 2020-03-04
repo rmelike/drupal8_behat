@@ -1,0 +1,37 @@
+default:
+  suites:
+    default:
+      contexts:
+        - SiteMapContext
+        - MarkupContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+  gherkin:
+    cache: ~
+  extensions:
+    DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+    Behat\MinkExtension:
+      goutte: ~
+      base_url: http://$BASE_URL
+      javascript_session: selenium2
+      selenium2:
+        wd_host: http://selenium:4444/wd/hub
+      browser_name: chrome
+
+    Drupal\DrupalExtension:
+      blackbox: ~
+      api_driver: drupal
+      drupal:
+        drupal_root: ./web
+
+      text:
+        log_out: "Log out"
+        log_in: "Se connecter"
+        password_field: "Mot de passe"
+        username_field: "Nom d'utilisateur"
+      region_map:
+        head: "head"
+        content: "region-content"
